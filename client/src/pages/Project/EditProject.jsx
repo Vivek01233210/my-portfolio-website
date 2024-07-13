@@ -3,14 +3,17 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import './projectCSS.css';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getProjectAPI } from "../../APIServices/projectAPI.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getProjectAPI, updateProjectAPI } from "../../APIServices/projectAPI.js";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
 export default function EditProject() {
     const { slug } = useParams();
+
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
     const [project, setProject] = useState(
         {
             name: '',
@@ -42,14 +45,19 @@ export default function EditProject() {
         }
     }, [data]);
 
+    const updateMutation = useMutation({
+        mutationFn: (projectData) => updateProjectAPI(slug, projectData),
+        onSuccess: () => {
+            queryClient.invalidateQueries("get-projects");
+        },
+    });
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.put(`${baseURL}/edit-projects/${slug}`, { project });
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
+        updateMutation
+            .mutateAsync(project)
+            .then(() => navigate('/projects'))
+            .catch((err) => console.log(err));
     }
 
     return (

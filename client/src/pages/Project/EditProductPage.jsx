@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { getAllProjects } from "../../APIServices/projectAPI.js";
+import { getAllProjectsAPI } from "../../APIServices/projectAPI.js";
 import { useQuery } from "@tanstack/react-query";
 
 export default function EditProductPage() {
     const { data } = useQuery({
         queryKey: ["get-projects"],
-        queryFn: () => getAllProjects(),
+        queryFn: () => getAllProjectsAPI(),
     });
 
     return (

@@ -51,75 +51,11 @@ app.use(mongoSanitize());
 
 // ROUTES
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Server is running!');
 });
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/projects", projectRouter);
-
-// get all projects
-app.get('/api/v1/projects', (req, res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error reading the file' });
-        }
-        try {
-            const jsonObject = JSON.parse(data);
-            // console.log(jsonObject)
-            res.json(jsonObject);
-        } catch (parseErr) {
-            res.status(500).json({ error: 'Error parsing JSON' });
-        }
-    });
-});
-
-// get a project
-app.get('/api/v1/projects/:slug', (req, res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error reading the file' });
-        }
-        try {
-            const jsonObject = JSON.parse(data);
-            const project = jsonObject.projects.find(project => project.slug === req.params.slug);
-            if (!project) {
-                return res.status(404).json({ error: 'Project not found' });
-            }
-            res.status(200).json(project);
-        } catch (parseErr) {
-            res.status(500).json({ error: 'Error parsing JSON' });
-        }
-    });
-});
-
-// update a project
-app.put('/api/v1/edit-projects/:slug', (req, res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error reading the file' });
-        }
-        try {
-            const jsonObject = JSON.parse(data);
-            const projectIndex = jsonObject.projects.findIndex(project => project.slug === req.params.slug);
-            if (projectIndex === -1) {
-                return res.status(404).json({ error: 'Project not found' });
-            }
-
-            jsonObject.projects[projectIndex] = req.body.project;
-
-            fs.writeFile(filePath, JSON.stringify(jsonObject, null, 2), (writeErr) => {
-                if (writeErr) {
-                    return res.status(500).json({ error: 'Error writing the file' });
-                }
-                res.status(200).json({ message: 'Project updated' });
-            });
-        } catch (parseErr) {
-            res.status(500).json({ error: 'Error parsing JSON' });
-            console.log(parseErr)
-        }
-    });
-});
-
 
 // NOT FOUND MIDDLEWARE
 app.use('*', (req, res) => {

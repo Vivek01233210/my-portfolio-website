@@ -1,63 +1,54 @@
 import Project from "../models/projectModel.js";
 
-
 // create a project
 export const createProject = async (req, res) => {
-    const project = {...req.body, createdBy: req.user._id};
-    console.log(project)
-    const newProject = await Project.create(project);
-    res.status(201).json({ message: "Project Created", project: newProject });
+    try {
+        const newProject = await Project.create({ ...req.body, createdBy: req.user._id });
+        res.status(201).json({ message: "Project Created", project: newProject });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: "Error creating project" });
+    }
+
 }
 
 // get all projects
-// app.get('/api/v1/projects', async(req, res) => {
-//     const projects = await Project.find({});
-//     res.status(200).json(projects);
-// });
+export const getAllProjects = async (req, res) => {
+    try {
+        const projects = await Project.find({});
+        res.status(200).json({ projects });
+    } catch (error) {
+        return res.status(500).json({ error: 'Error getting projects' });
+    }
+}
 
 // get a project
-// app.get('/api/v1/projects/:slug', (req, res) => {
-//     fs.readFile(filePath, 'utf8', (err, data) => {
-//         if (err) {
-//             return res.status(500).json({ error: 'Error reading the file' });
-//         }
-//         try {
-//             const jsonObject = JSON.parse(data);
-//             const project = jsonObject.projects.find(project => project.slug === req.params.slug);
-//             if (!project) {
-//                 return res.status(404).json({ error: 'Project not found' });
-//             }
-//             res.status(200).json(project);
-//         } catch (parseErr) {
-//             res.status(500).json({ error: 'Error parsing JSON' });
-//         }
-//     });
-// });
+export const getProject = async (req, res) => {
+    try {
+        const project = await Project.findOne({ slug: req.params.slug });
+        if (!project) {
+            return res.status(404).json({ error: 'Project not found' });
+        }
+        res.status(200).json(project);
+    } catch (error) {
+        return res.status(500).json({ error: 'Error getting project' });
+    }
+}
 
 // update a project
-// app.put('/api/v1/edit-projects/:slug', (req, res) => {
-//     fs.readFile(filePath, 'utf8', (err, data) => {
-//         if (err) {
-//             return res.status(500).json({ error: 'Error reading the file' });
-//         }
-//         try {
-//             const jsonObject = JSON.parse(data);
-//             const projectIndex = jsonObject.projects.findIndex(project => project.slug === req.params.slug);
-//             if (projectIndex === -1) {
-//                 return res.status(404).json({ error: 'Project not found' });
-//             }
-
-//             jsonObject.projects[projectIndex] = req.body.project;
-
-//             fs.writeFile(filePath, JSON.stringify(jsonObject, null, 2), (writeErr) => {
-//                 if (writeErr) {
-//                     return res.status(500).json({ error: 'Error writing the file' });
-//                 }
-//                 res.status(200).json({ message: 'Project updated' });
-//             });
-//         } catch (parseErr) {
-//             res.status(500).json({ error: 'Error parsing JSON' });
-//             console.log(parseErr)
-//         }
-//     });
-// });
+export const updateProject = async (req, res) => {
+    try {
+        const updatedProject = await Project.findOneAndUpdate(
+            { slug: req.params.slug }, 
+            {...req.body, createdBy: req.user._id }, 
+            { new: true }
+        );
+        if (!updatedProject) {
+            return res.status(404).json({ error: 'Project not found' });
+        }
+        return res.status(200).json({ message: 'Project updated' });
+    }
+    catch (error) {
+        return res.status(500).json({ error: 'Error updating project' });
+    }
+}

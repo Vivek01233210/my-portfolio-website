@@ -10,13 +10,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query'
-import { getAllProjects } from '../../APIServices/projectAPI.js'
+import { getAllProjectsAPI } from '../../APIServices/projectAPI.js'
 
 export default function ProjectSection() {
 
     const { data } = useQuery({
         queryKey: ["get-projects"],
-        queryFn: () => getAllProjects(),
+        queryFn: () => getAllProjectsAPI(),
     });
 
     return (
