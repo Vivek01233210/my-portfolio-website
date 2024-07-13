@@ -3,7 +3,7 @@ import { getAllProjects } from "../../APIServices/projectAPI.js";
 import { useQuery } from "@tanstack/react-query";
 
 export default function EditProductPage() {
-    const { isError, isLoading, data } = useQuery({
+    const { data } = useQuery({
         queryKey: ["get-projects"],
         queryFn: () => getAllProjects(),
     });
@@ -18,7 +18,6 @@ export default function EditProductPage() {
                         to={`/edit-projects/${project.slug}`}
                         className=" bg-stone-300 mb-4 py-2 px-3 rounded-md hover:bg-stone-400">
                         <p>{project?.name}</p>
-                        {/* <p>{project.description}</p> */}
                     </Link>
                 ))}
             </div>

@@ -1,14 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMenu, IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import user from '../assets/user12.jpg';
-import { NAV_ITEMS } from "../Constants.js";
+// import { NAV_ITEMS } from "../Constants.js";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/slices/authSlice.js";
+import { logoutAPI } from "../APIServices/userAPI.js";
+import { useMutation } from "@tanstack/react-query";
+
 
 export default function Navbar() {
-
+  const NAV_ITEMS = [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects' },
+    // { name: 'Edit', path: '/edit-projects' },
+    { name: 'About', path: '/about' },
+    // { name: 'Admin', path: '/login' },
+  ]
   const sidebarRef = useRef();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isTop, setIsTop] = useState(true);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const logoutMutation = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: logoutAPI,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +45,7 @@ export default function Navbar() {
       // Close the sidebar if click is outside
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) { setIsSidebarOpen(false) }
     }
-
-    // Add event listener when the component mounts
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Remove event listener on cleanup
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -44,6 +60,20 @@ export default function Navbar() {
       document.body.style.overflow = 'visible';
     }
   }, [isSidebarOpen]);
+
+  if (isAuthenticated) {
+    NAV_ITEMS.push({ name: 'Edit', path: '/edit-projects' });
+  } else {
+    NAV_ITEMS.push({ name: 'Admin', path: '/login' });
+  }
+
+  const handleLogout = () => {
+    logoutMutation
+      .mutateAsync()
+      .then(() => dispatch(logout()))
+      .then(() => navigate('/'))
+      .catch((e) => console.log(e));
+  }
 
   return (
     <nav className={`fixed z-10 w-full h-16 flex justify-between items-center ${isTop ? '' : 'shadow-md backdrop-blur-lg'} transition-all`}>
@@ -97,6 +127,12 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
+          {isAuthenticated && (
+            <button onClick={handleLogout} 
+            className="cursor-pointer underline-offset-4 hover:underline">
+              Logout
+            </button>
+          )}
         </ul>
       </div>
     </nav>

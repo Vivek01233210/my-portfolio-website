@@ -10,6 +10,12 @@ import NotFound from './pages/NotFound.jsx';
 import AllProjects from './pages/Project/AllProjects.jsx';
 import EditProject from './pages/Project/EditProject.jsx';
 import EditProductPage from './pages/Project/EditProductPage.jsx';
+import Login from './pages/Authentication/Login.jsx';
+import { useDispatch } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { isAuthenticated } from './redux/slices/authSlice.js';
+import { checkUserAPI } from './APIServices/userAPI.js';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +29,11 @@ const router = createBrowserRouter([
         element: <Content />
       },
       {
+        path: 'login',
+        element: <Login />
+      },
+      
+      {
         path: 'projects',
         element: <AllProjects />,
       },
@@ -31,11 +42,11 @@ const router = createBrowserRouter([
         element: <ProjectDetails />,
       },
       {
-        path: '/edit-projects',
+        path: 'edit-projects',
         element: <EditProductPage />,
       },
       {
-        path: '/edit-projects/:slug',
+        path: 'edit-projects/:slug',
         element: <EditProject />,
       },
       {
@@ -47,6 +58,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  const { data } = useQuery({
+    queryKey: ["check-user"],
+    queryFn: checkUserAPI,
+  });
+
+  useEffect(() => {
+    if (!data) return;
+    dispatch(isAuthenticated(data));
+  }, [data]);
 
   return (
     <>

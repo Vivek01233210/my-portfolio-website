@@ -1,35 +1,3 @@
-import bondify1 from '../../assets/Bondify-imgs/img1.png'
-import bondify2 from '../../assets/Bondify-imgs/img2.png'
-import bondify3 from '../../assets/Bondify-imgs/img3.png'
-import bondify4 from '../../assets/Bondify-imgs/img4.png'
-import bondify5 from '../../assets/Bondify-imgs/img5.png'
-import bondify6 from '../../assets/Bondify-imgs/img6.png'
-import bondify7 from '../../assets/Bondify-imgs/img7.png'
-import bondify8 from '../../assets/Bondify-imgs/img8.png'
-import bondify9 from '../../assets/Bondify-imgs/img9.png'
-import bondify10 from '../../assets/Bondify-imgs/img10.png'
-import bondify11 from '../../assets/Bondify-imgs/img11.png'
-import bondify12 from '../../assets/Bondify-imgs/img12.png'
-import bondify13 from '../../assets/Bondify-imgs/img13.png'
-import bondify14 from '../../assets/Bondify-imgs/img14.png'
-import bondify15 from '../../assets/Bondify-imgs/img15.png'
-import bondify16 from '../../assets/Bondify-imgs/img16.png'
-import jobify1 from '../../assets/Jobify-imgs/img1.png';
-import jobify2 from '../../assets/Jobify-imgs/img2.png';
-import jobify3 from '../../assets/Jobify-imgs/img3.png';
-import jobify4 from '../../assets/Jobify-imgs/img4.png';
-import jobify5 from '../../assets/Jobify-imgs/img5.png';
-import jobify6 from '../../assets/Jobify-imgs/img6.png';
-import jobify7 from '../../assets/Jobify-imgs/img7.png';
-import ecom1 from '../../assets/Ecommerce-imgs/img1.png';
-import ecom2 from '../../assets/Ecommerce-imgs/img2.png';
-import ecom3 from '../../assets/Ecommerce-imgs/img3.png';
-import ecom4 from '../../assets/Ecommerce-imgs/img4.png';
-import ecom5 from '../../assets/Ecommerce-imgs/img5.png';
-import ecom6 from '../../assets/Ecommerce-imgs/img6.png';
-import ecom7 from '../../assets/Ecommerce-imgs/img7.png';
-import ecom8 from '../../assets/Ecommerce-imgs/img8.png';
-
 import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import { IoArrowForward } from "react-icons/io5";
@@ -37,31 +5,19 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-
-const baseURL = import.meta.env.VITE_API_URL;
+import { useQuery } from '@tanstack/react-query'
+import { getAllProjects } from '../../APIServices/projectAPI.js'
 
 export default function ProjectSection() {
-    const [allProjects, setAllProjects] = useState(null);
-    const fetchAllProjects = async () => {
-        try {
-            const response = await axios.get(`${baseURL}/projects`);
-            console.log(response.data.projects)
-            setAllProjects(response.data.projects);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    useEffect(() => {
-        fetchAllProjects();
-    }, []);
+
+    const { data } = useQuery({
+        queryKey: ["get-projects"],
+        queryFn: () => getAllProjects(),
+    });
 
     return (
         <section className='py-12 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
@@ -70,9 +26,9 @@ export default function ProjectSection() {
 
             {/* Project-Card */}
             <div className='grid grid-col-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8 place-items-center'>
-                {allProjects?.slice(0, 3).map(project => (
+                {data?.projects?.slice(0, 3).map(project => (
                     <div
-                        key={project._id}
+                        key={project.slug}
                         className='rounded-xl border-2 border-gray-400 md:w-72 w-[22rem] overflow-hidden bg-white transition duration-300 hover:scale-105 hover:shadow-xl'>
                         <div className="slider-wrapper">
                             <Swiper

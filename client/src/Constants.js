@@ -3,6 +3,7 @@ export const NAV_ITEMS = [
     { name: 'Projects', path: '/projects' },
     { name: 'Edit', path: '/edit-projects' },
     { name: 'About', path: '/about' },
+    { name: 'Admin', path: '/login' },
 ]
 
 // export const PROJECT_CARDS = [

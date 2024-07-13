@@ -4,6 +4,8 @@ import "react-quill/dist/quill.snow.css";
 import './projectCSS.css';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getProjectAPI } from "../../APIServices/projectAPI.js";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
@@ -21,18 +23,24 @@ export default function EditProject() {
         }
     )
 
-    const fetchProject = async () => {
-        try {
-            const response = await axios.get(`${baseURL}/projects/${slug}`);
-            setProject(response.data);
-            // setDescription(response.data.description);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    const { data } = useQuery({
+        queryKey: ["post-details"],
+        queryFn: () => getProjectAPI(slug),
+    });
+
     useEffect(() => {
-        fetchProject();
-    }, []);
+        if (data) {
+            setProject({
+                name: data.name || '',
+                slug: data.slug || '',
+                liveUrl: data.liveUrl || '',
+                githubUrl: data.githubUrl || '',
+                images: data.images || [],
+                cardDescription: data.cardDescription || '',
+                description: data.description || '',
+            });
+        }
+    }, [data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,6 +63,7 @@ export default function EditProject() {
                         <label htmlFor="name" className="text-xl font-medium">Project Title:</label>
                         <input
                             type="text"
+                            required
                             id="name"
                             className="w-full border-[1px] border-gray-300 rounded-md p-1"
                             value={project?.name}
@@ -69,6 +78,7 @@ export default function EditProject() {
                         <input
                             type="text"
                             id="slug"
+                            required
                             className="w-full border-[1px] border-gray-300 rounded-md p-1"
                             value={project?.slug}
                             onChange={(e) => {
@@ -108,6 +118,7 @@ export default function EditProject() {
                         <textarea
                             type="text"
                             id="images"
+                            required
                             className="w-full h-40 border-[1px] border-gray-300 rounded-md p-1"
                             value={project?.images?.join(',\n')}
                             onChange={(e) => {
@@ -122,6 +133,7 @@ export default function EditProject() {
                         <textarea
                             type="text"
                             id="card"
+                            required
                             className="w-full border-[1px] border-gray-300 rounded-md p-1"
                             value={project?.cardDescription}
                             onChange={(e) => {
@@ -140,6 +152,7 @@ export default function EditProject() {
                         <ReactQuill
                             value={project?.description}
                             className="h-48"
+                            required
                             onChange={(value) => {
                                 setProject(prev => ({ ...prev, description: value }));
                             }}

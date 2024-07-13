@@ -7,15 +7,15 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import User from './models/userModel.js';
 
 // public
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
+import { checkUser } from './middlewares/checkUser.js';
+import userRouter from './routes/userRoutes.js';
+import postRouter from './routes/projectRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -54,33 +54,9 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-// make a login route
-app.post('/api/v1/login', async(req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Please provide email and password' });
-    }
-    // check if the user exists
-    const user = await User.findOne({ email });
-    if (!user) res.status(400).json({ error: 'Invalid credentials' });
 
-    // check if the password is correct
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) res.status(400).json({ error: 'Invalid credentials' });
-
-    // save user in the req
-    req.user = user;
-    
-    // send a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-    res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1-day
-        secure: process.env.NODE_ENV === 'production',
-    });
-
-    res.status(200).json({ message: 'Login successful' });
-});
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/projects", postRouter);
 
 // get all projects
 app.get('/api/v1/projects', (req, res) => {
@@ -90,6 +66,7 @@ app.get('/api/v1/projects', (req, res) => {
         }
         try {
             const jsonObject = JSON.parse(data);
+            // console.log(jsonObject)
             res.json(jsonObject);
         } catch (parseErr) {
             res.status(500).json({ error: 'Error parsing JSON' });
@@ -129,7 +106,7 @@ app.put('/api/v1/edit-projects/:slug', (req, res) => {
                 return res.status(404).json({ error: 'Project not found' });
             }
 
-            jsonObject.projects[projectIndex]= req.body.project;
+            jsonObject.projects[projectIndex] = req.body.project;
 
             fs.writeFile(filePath, JSON.stringify(jsonObject, null, 2), (writeErr) => {
                 if (writeErr) {
@@ -143,6 +120,9 @@ app.put('/api/v1/edit-projects/:slug', (req, res) => {
         }
     });
 });
+
+// check user
+app.get('/api/v1/check-user', checkUser);
 
 // NOT FOUND MIDDLEWARE
 app.use('*', (req, res) => {

@@ -8,34 +8,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getAllProjects } from "../../APIServices/projectAPI.js";
 
-const baseURL = import.meta.env.VITE_API_URL;
 
 export default function AllProjects() {
-    const [allProjects, setAllProjects] = useState(null);
-    const fetchAllProjects = async () => {
-        try {
-            const response = await axios.get(`${baseURL}/projects`);
-            console.log(response.data.projects)
-            setAllProjects(response.data.projects);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    useEffect(() => {
-        fetchAllProjects();
-    }, []);
+
+    const { data } = useQuery({
+        queryKey: ["get-projects"],
+        queryFn: () => getAllProjects(),
+    });
 
     return (
         <section className="py-24 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20">
             <h1 className="text-3xl font-medium text-center">ALL PROJECTS</h1>
             {/* Project-Card */}
             <div className='grid grid-col-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8 place-items-center'>
-                {allProjects?.map(project => (
+                {data?.projects?.map(project => (
                     <div
                         key={project.slug}
                         className='rounded-xl border-2 border-gray-400 md:w-72 w-[22rem] overflow-hidden bg-white transition duration-300 hover:scale-105 hover:shadow-xl'>
