@@ -23,7 +23,7 @@ export const logoutAPI = async () => {
 
 
 export const checkUserAPI = async () => {
-    const response = await axios.get(`${baseUrl}/check-user`, {
+    const response = await axios.get(`${baseUrl}/user/check-user`, {
         withCredentials: true
     });
 

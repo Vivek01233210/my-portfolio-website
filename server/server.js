@@ -13,9 +13,9 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
-import { checkUser } from './middlewares/checkUser.js';
 import userRouter from './routes/userRoutes.js';
-import postRouter from './routes/projectRoutes.js';
+import projectRouter from './routes/projectRoutes.js';
+import { protect } from './middlewares/protect.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -54,9 +54,8 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/projects", postRouter);
+app.use("/api/v1/projects", projectRouter);
 
 // get all projects
 app.get('/api/v1/projects', (req, res) => {
@@ -121,8 +120,6 @@ app.put('/api/v1/edit-projects/:slug', (req, res) => {
     });
 });
 
-// check user
-app.get('/api/v1/check-user', checkUser);
 
 // NOT FOUND MIDDLEWARE
 app.use('*', (req, res) => {

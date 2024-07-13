@@ -15,7 +15,7 @@ export default function EditProductPage() {
                 {data?.projects?.map((project, index) => (
                     <Link
                         key={index}
-                        to={`/edit-projects/${project.slug}`}
+                        to={`/projects/edit-projects/${project.slug}`}
                         className=" bg-stone-300 mb-4 py-2 px-3 rounded-md hover:bg-stone-400">
                         <p>{project?.name}</p>
                     </Link>

@@ -14,7 +14,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'Projects', path: '/projects' },
     // { name: 'Edit', path: '/edit-projects' },
-    { name: 'About', path: '/about' },
+    // { name: 'About', path: '/about' },
     // { name: 'Admin', path: '/login' },
   ]
   const sidebarRef = useRef();
@@ -62,7 +62,8 @@ export default function Navbar() {
   }, [isSidebarOpen]);
 
   if (isAuthenticated) {
-    NAV_ITEMS.push({ name: 'Edit', path: '/edit-projects' });
+    NAV_ITEMS.push({ name: 'Edit', path: '/projects/edit-projects' });
+    NAV_ITEMS.push({ name: 'Create', path: '/projects/create-project' });
   } else {
     NAV_ITEMS.push({ name: 'Admin', path: '/login' });
   }

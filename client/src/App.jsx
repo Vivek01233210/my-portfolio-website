@@ -16,6 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { isAuthenticated } from './redux/slices/authSlice.js';
 import { checkUserAPI } from './APIServices/userAPI.js';
+import CreateProject from './pages/Project/CreateProject.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,11 +43,15 @@ const router = createBrowserRouter([
         element: <ProjectDetails />,
       },
       {
-        path: 'edit-projects',
+        path: 'projects/create-project',
+        element: <CreateProject />,
+      },
+      {
+        path: 'projects/edit-projects',
         element: <EditProductPage />,
       },
       {
-        path: 'edit-projects/:slug',
+        path: 'projects/edit-projects/:slug',
         element: <EditProject />,
       },
       {

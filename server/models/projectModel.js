@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const ProjectSchema = new mongoose.Schema(
     {
-        title: {
+        name: {
             type: String,
-            required: [true, "Please provide the project title"],
+            required: [true, "Please provide the project name"],
         },
         description: {
             type: String,
