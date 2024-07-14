@@ -61,7 +61,11 @@ export default function AllProjects() {
                             </Swiper>
                         </div>
                         <div className='p-4'>
-                            <h3 className='pb-2 text-2xl font-semibold text-black text-center'>{project.name}</h3>
+                            <h3 className="text-center">
+                                <Link to={`/projects/${project.slug}`} className='pb-2 text-2xl font-semibold text-black hover:underline'>
+                                    {project.name}
+                                </Link>
+                            </h3>
                             <p className='text-gray-600 overflow-hidden multi-line-ellipsis'>{project.cardDescription}</p>
                             <div className='py-4 flex gap-2 justify-center'>
                                 <Link

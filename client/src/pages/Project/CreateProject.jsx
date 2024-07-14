@@ -4,9 +4,13 @@ import "react-quill/dist/quill.snow.css";
 import './projectCSS.css';
 import { useMutation } from "@tanstack/react-query";
 import { createProjectAPI } from "../../APIServices/projectAPI.js";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CreateProject() {
+
+    const navigate = useNavigate();
+
     const [project, setProject] = useState(
         {
             name: '',
@@ -24,14 +28,15 @@ export default function CreateProject() {
         mutationFn: createProjectAPI,
     });
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         projectMutation
             .mutateAsync(project)
-            .then(() => console.log("Project created successfully"))
+            .then(() => navigate('/projects'))
             .catch((err) => console.log(err));
     }
+
+    const { isPending, error, isError } = projectMutation;
 
     return (
         <section className='py-20 lg:py-28 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
@@ -39,8 +44,9 @@ export default function CreateProject() {
             <div className="bg-white p-4 rounded-lg">
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="text-right">
-                        <button className="bg-stone-300 hover:bg-stone-400 text-xl px-4 py-2 rounded-md">Save</button>
+                        {isPending ? <button className="bg-stone-300 hover:bg-stone-400 text-xl px-4 py-2 rounded-md" disabled>Creating...</button> : <button className="bg-stone-300 hover:bg-stone-400 text-xl px-4 py-2 rounded-md">Save</button>}
                     </div>
+                    {isError && <div className="text-red-500 text-center">{error?.response?.data?.error?.errorResponse?.errmsg}</div>}
                     <div>
                         <label htmlFor="name" className="text-xl font-medium">Project Title:</label>
                         <input

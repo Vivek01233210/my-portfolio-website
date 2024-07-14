@@ -17,6 +17,8 @@ import { useEffect } from 'react';
 import { isAuthenticated } from './redux/slices/authSlice.js';
 import { checkUserAPI } from './APIServices/userAPI.js';
 import CreateProject from './pages/Project/CreateProject.jsx';
+import PublicRoute from './pages/Authentication/PublicRoute.jsx';
+import AdminRoute from './pages/Authentication/AdminRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,39 +27,25 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     loadingElement: <Loading />,
     children: [
-      {
-        index: true,
-        element: <Content />
-      },
+      { index: true, element: <Content /> },
       {
         path: 'login',
-        element: <Login />
-      },
-      
+        element: <PublicRoute />,
+        children: [
+          { index: true, element: <Login /> },
+        ],
+      },      { path: 'projects', element: <AllProjects />, },
+      { path: 'projects/:slug', element: <ProjectDetails />, },
       {
         path: 'projects',
-        element: <AllProjects />,
+        element: <AdminRoute />,
+        children: [
+          { path: 'create-project', element: <CreateProject /> },
+          { path: 'edit-projects', element: <EditProductPage /> },
+          { path: 'edit-projects/:slug', element: <EditProject /> },
+        ],
       },
-      {
-        path: 'projects/:slug',
-        element: <ProjectDetails />,
-      },
-      {
-        path: 'projects/create-project',
-        element: <CreateProject />,
-      },
-      {
-        path: 'projects/edit-projects',
-        element: <EditProductPage />,
-      },
-      {
-        path: 'projects/edit-projects/:slug',
-        element: <EditProject />,
-      },
-      {
-        path: '*',
-        element: <NotFound />,
-      }
+      { path: '*', element: <NotFound />, }
     ]
   },
 ]);

@@ -7,28 +7,13 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Link, useParams } from 'react-router-dom'
 import { FiExternalLink } from 'react-icons/fi'
 import { FaLink } from 'react-icons/fa6'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-
-const baseURL = import.meta.env.VITE_API_URL;
+import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { getProjectAPI } from '../../APIServices/projectAPI.js';
 import { ImSpinner8 } from 'react-icons/im';
 
 export default function ProjectDetails() {
-    // const [project, setProject] = useState(null);
     const { slug } = useParams();
-    // const fetchProject = async () => {
-    //     try {
-    //         const response = await axios.get(`${baseURL}/projects/${slug}`);
-    //         setProject(response.data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-    // useEffect(() => {
-    //     fetchProject();
-    // }, []);
 
     const { data: project, isLoading } = useQuery({
         queryKey: ['get-project'],
@@ -39,15 +24,16 @@ export default function ProjectDetails() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
 
-    if(isLoading) return <div className="h-[70vh] flex justify-center items-center"><ImSpinner8 className="w-20 h-20 animate-spin" /></div>
+    if (isLoading) return <div className="h-[70vh] flex justify-center items-center"><ImSpinner8 className="w-20 h-20 animate-spin" /></div>
 
     return (
         <main className=''>
             <div className='h-16'></div>
             <section className='max-w-[50rem] mx-auto py-12 sm:px-10 lg:px-12'>
-            <h1 className="text-3xl font-medium text-center mb-4">{project?.name}</h1>
+                <h1 className="text-3xl font-medium text-center mb-4">{project?.name}</h1>
                 <div className=''>
                     {project?.images && <Swiper
+                        key={project._id}
                         spaceBetween={30}
                         centeredSlides={true}
                         loop={true}
@@ -62,7 +48,7 @@ export default function ProjectDetails() {
                         modules={[Autoplay, Pagination, Navigation]}
                         className="h-72 lg:h-96 border-2 border-stone-400 rounded-xl"
                     >
-                        {project?.images.map((img, index) => (
+                        {project.images.map((img, index) => (
                             <SwiperSlide key={index}>
                                 <img src={`/${img}`} alt="project-img" className="object-cover block w-full h-full" />
                             </SwiperSlide>

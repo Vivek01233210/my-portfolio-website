@@ -8,7 +8,7 @@ import { isAuthenticated } from '../../redux/slices/authSlice.js';
 export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [userData, setUserData] = useState({ email: 'vivek3553.vk@gmail.com', password: 'admin@1234' });
+    const [userData, setUserData] = useState({ email: 'vivek3553.vk@gmail.com', password: 'vivek@admin@3553.vk' });
 
     const loginMutation = useMutation({
         mutationKey: ["login"],
