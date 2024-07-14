@@ -5,6 +5,7 @@ import ProjectSection from './Sections/ProjectSection.jsx';
 import SkillSection from './Sections/SkillSection.jsx';
 import HeroSection from './Sections/HeroSection.jsx';
 import AboutMe from './Sections/AboutMe.jsx';
+import ContactMe from './Sections/ContactMe.jsx';
 
 
 export default function Content() {
@@ -20,7 +21,9 @@ export default function Content() {
       <SkillSection />
 
       <ProjectSection />
-      
+
+      <ContactMe />
+
     </>
   )
 }
