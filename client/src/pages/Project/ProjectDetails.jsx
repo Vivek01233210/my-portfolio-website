@@ -5,7 +5,6 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 import { Link, useParams } from 'react-router-dom'
-import NotFound from '../NotFound.jsx'
 import { FiExternalLink } from 'react-icons/fi'
 import { FaLink } from 'react-icons/fa6'
 import { useEffect, useState } from 'react'
@@ -25,10 +24,14 @@ export default function ProjectDetails() {
             console.error(error);
         }
     }
+    
     useEffect(() => {
         fetchProject();
     }, []);
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <main className=''>

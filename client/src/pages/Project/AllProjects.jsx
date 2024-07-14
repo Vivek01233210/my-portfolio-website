@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useQuery } from "@tanstack/react-query";
 import { getAllProjectsAPI } from "../../APIServices/projectAPI.js";
+import { useEffect } from "react";
 
 
 export default function AllProjects() {
@@ -20,6 +21,10 @@ export default function AllProjects() {
         queryKey: ["get-projects"],
         queryFn: () => getAllProjectsAPI(),
     });
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <section className="py-24 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20">
