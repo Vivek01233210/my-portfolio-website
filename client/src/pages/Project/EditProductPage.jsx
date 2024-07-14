@@ -9,8 +9,8 @@ export default function EditProductPage() {
     });
 
     return (
-        <section className="py-20 h-[80vh] lg:py-28 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20">
-            <h1 className="text-2xl text-center">Select Project to Edit</h1>
+        <section className="py-24 h-[80vh] lg:py-28 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20">
+            <h1 className="text-3xl font-medium text-center">Select Project to Edit</h1>
             <div className="p-8 flex gap-8">
                 {data?.projects?.map((project, index) => (
                     <Link

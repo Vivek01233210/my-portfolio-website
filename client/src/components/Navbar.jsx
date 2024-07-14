@@ -87,7 +87,7 @@ export default function Navbar() {
         <div className="py-8 mt-8 flex flex-col items-center justify-center gap-2 border-b-[1px] border-gray-300">
           <img src={user} alt="user-img"
             className="w-28 h-28 rounded-full object-cover shadow-2xl bw" />
-          <p className="text-2xl font-medium tracking-wide">Vivek Kumar</p>
+          <Link to='/' className="text-2xl font-medium tracking-wide">Vivek Kumar</Link>
         </div>
         <ul className="flex flex-col items-start gap-4 py-8 px-2">
           {NAV_ITEMS.map((item, index) => (
@@ -99,6 +99,12 @@ export default function Navbar() {
               {item.name}
             </Link>
           ))}
+          {isAuthenticated && (
+            <button onClick={()=>{handleLogout(); setIsSidebarOpen(false)}} 
+            className="p-4 w-full text-center text-xl cursor-pointer active:bg-stone-300 rounded-lg">
+              Logout
+            </button>
+          )}
         </ul>
         <div className="mt-auto p-4 text-center font-mono font-thin text-xs text-gray-500">Copyright &copy; 2024</div>
 
@@ -113,9 +119,9 @@ export default function Navbar() {
         <div className="fixed top-0 left-0 z-10 w-screen h-screen opacity-50 bg-black"></div>
       )}
 
-      <p className="order-1 mr-12 md:mr-28 md:ml-12 lg:ml-20 text-2xl md:text-3xl lg:text-4xl font-medium">
+      <Link to='/' className="order-1 mr-12 md:mr-28 md:ml-12 lg:ml-20 text-2xl md:text-3xl lg:text-4xl font-medium">
         Vivek Kumar
-      </p>
+      </Link>
 
       <div className="hidden md:block order-1">
         <ul className="flex gap-8 lg:gap-16  md:text-lg lg:text-xl mr-16 lg:mr-20">

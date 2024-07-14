@@ -62,6 +62,7 @@ export default function EditProject() {
 
     return (
         <section className='py-20 lg:py-28 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
+            <h1 className="text-3xl font-medium text-center mb-4">Edit Project</h1>
             <div className="bg-white p-4 rounded-lg">
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="text-right">

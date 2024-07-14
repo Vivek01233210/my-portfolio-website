@@ -21,13 +21,13 @@ export default function Login() {
             .mutateAsync(userData)
             .then((data) => dispatch(isAuthenticated(data)))
             .then(() => navigate("/"))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err.response.data.error));
     };
 
-    const { isPending } = loginMutation;
+    const { isPending, error, isError } = loginMutation;
 
     return (
-        <section className="pt-20 lg:pt-0 flex items-center justify-center min-h-screen">
+        <section className="md:pt-16 px-6 mb-4 flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
                 <h2 className="text-2xl font-bold text-center">Admin Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -64,6 +64,7 @@ export default function Login() {
                     >
                         {isPending ? 'Logging in...' : 'Login'}
                     </button>
+                    {isError && <div className="text-center">{error?.response?.data?.error}</div>}
                 </form>
             </div>
         </section>);

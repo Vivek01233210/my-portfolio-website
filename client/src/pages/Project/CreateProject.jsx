@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import './projectCSS.css';
-import axios from 'axios';
-import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { createProjectAPI } from "../../APIServices/projectAPI.js";
 
-const baseURL = import.meta.env.VITE_API_URL;
 
 export default function CreateProject() {
     const [project, setProject] = useState(
@@ -32,12 +29,13 @@ export default function CreateProject() {
         e.preventDefault();
         projectMutation
             .mutateAsync(project)
-            .then((data) => console.log(data))
+            .then(() => console.log("Project created successfully"))
             .catch((err) => console.log(err));
     }
 
     return (
         <section className='py-20 lg:py-28 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
+            <h1 className="text-3xl font-medium text-center mb-4">Create a new Project</h1>
             <div className="bg-white p-4 rounded-lg">
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="text-right">

@@ -2,6 +2,7 @@ import { FaLink } from "react-icons/fa6";
 import { FiExternalLink } from "react-icons/fi";
 import { IoArrowForward } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { ImSpinner8 } from "react-icons/im";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -15,7 +16,7 @@ import { getAllProjectsAPI } from "../../APIServices/projectAPI.js";
 
 export default function AllProjects() {
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["get-projects"],
         queryFn: () => getAllProjectsAPI(),
     });
@@ -23,6 +24,8 @@ export default function AllProjects() {
     return (
         <section className="py-24 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20">
             <h1 className="text-3xl font-medium text-center">ALL PROJECTS</h1>
+            {isLoading && <div className="h-[70vh] flex justify-center items-center"><ImSpinner8 className="w-20 h-20 animate-spin" /></div>}
+
             {/* Project-Card */}
             <div className='grid grid-col-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8 place-items-center'>
                 {data?.projects?.map(project => (

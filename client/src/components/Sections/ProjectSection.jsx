@@ -11,10 +11,11 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query'
 import { getAllProjectsAPI } from '../../APIServices/projectAPI.js'
+import { ImSpinner8 } from "react-icons/im";
 
 export default function ProjectSection() {
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["get-projects"],
         queryFn: () => getAllProjectsAPI(),
     });
@@ -24,6 +25,7 @@ export default function ProjectSection() {
             <p className='text-center mb-4 text-gray-500'>My Work</p>
             <h2 className='text-5xl font-bold text-center'>Projects</h2>
 
+            {isLoading && <div className="flex justify-center m-8 p-8"><ImSpinner8 className="w-20 h-20 animate-spin" /></div>}
             {/* Project-Card */}
             <div className='grid grid-col-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8 place-items-center'>
                 {data?.projects?.slice(0, 3).map(project => (
