@@ -1,9 +1,16 @@
 import { useRef } from 'react';
+import { messageAPI } from '../../APIServices/userAPI.js';
+import { useMutation } from '@tanstack/react-query';
 
 export default function ContactMe() {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const messageRef = useRef(null);
+
+    const messageMutation = useMutation({
+        mutationKey: ["message"],
+        mutationFn: messageAPI,
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -11,15 +18,18 @@ export default function ContactMe() {
         const email = emailRef.current.value;
         const message = messageRef.current.value;
 
-        // Handle form submission logic here
-        console.log('Name:', name);
-        console.log('Email:', email);
-        console.log('Message:', message);
+        const clientMessage = { name, email, message };
+        console.log(clientMessage)
+
+        messageMutation.mutateAsync(clientMessage)
+            .then(() => console.log("Message sent"))
+            // .catch(() => console.log("Something went wrong while sending the message. Try again later!"));
+            .catch((err) => console.log(err));
 
         // Clear the form fields
-        nameRef.current.value = '';
-        emailRef.current.value = '';
-        messageRef.current.value = '';
+        // nameRef.current.value = '';
+        // emailRef.current.value = '';
+        // messageRef.current.value = '';
     };
 
     return (
@@ -62,7 +72,7 @@ export default function ContactMe() {
                     <div>
                         <button
                             type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                            className="w-full flex justify-center py-2 px-4 border-2 border-black rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-white hover:text-black focus:outline-none focus:ring-2  focus:ring-stone-300"
                         >
                             Submit
                         </button>
