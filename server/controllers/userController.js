@@ -1,7 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import Message from "../models/messageModel.js";
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -58,22 +57,5 @@ export const checkUser = async (req, res, next) => {
 
     } catch (error) {
         return res.status(401).json({ isAuthenticated: false, error });
-    }
-};
-
-// message 
-export const message = async (req, res) => {
-    const { name, email, message } = req.body;
-    if (!name) {
-        return res.status(400).json({ error: 'Please provide your name!' });
-    } else if (!message) {
-        return res.status(400).json({ error: 'Please provide a message!' });
-    }
-
-    try {
-        await Message.create({ name, email, message });
-        return res.status(200).json({ message: 'Message sent successfully' });
-    } catch (error) {
-        return res.status(500).json({ error: 'Internal server error' });
     }
 };

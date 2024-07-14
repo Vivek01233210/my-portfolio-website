@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { messageAPI } from '../../APIServices/userAPI.js';
 import { useMutation } from '@tanstack/react-query';
+import { postMessageAPI } from '../../APIServices/messageAPI.js';
 
 export default function ContactMe() {
     const nameRef = useRef(null);
@@ -9,7 +9,7 @@ export default function ContactMe() {
 
     const messageMutation = useMutation({
         mutationKey: ["message"],
-        mutationFn: messageAPI,
+        mutationFn: postMessageAPI,
     })
 
     const handleSubmit = (e) => {

@@ -29,9 +29,3 @@ export const checkUserAPI = async () => {
 
     return response.data;
 };
-
-export const messageAPI = async (message) => {
-    const response = await axios.post(`${baseUrl}/user/message`, message);
-
-    return response.data;
-}

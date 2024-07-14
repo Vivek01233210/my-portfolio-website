@@ -15,7 +15,7 @@ import path from 'path';
 import fs from 'fs';
 import userRouter from './routes/userRoutes.js';
 import projectRouter from './routes/projectRoutes.js';
-import { protect } from './middlewares/protect.js';
+import messageRouter from './routes/messageRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/projects", projectRouter);
+app.use("/api/v1/message", messageRouter);
 
 // NOT FOUND MIDDLEWARE
 app.use('*', (req, res) => {

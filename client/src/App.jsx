@@ -19,6 +19,7 @@ import { checkUserAPI } from './APIServices/userAPI.js';
 import CreateProject from './pages/Project/CreateProject.jsx';
 import PublicRoute from './pages/Authentication/PublicRoute.jsx';
 import AdminRoute from './pages/Authentication/AdminRoute.jsx';
+import Messages from './pages/Messages.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,15 +35,17 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Login /> },
         ],
-      },      { path: 'projects', element: <AllProjects />, },
+      },
+      { path: 'projects', element: <AllProjects />, },
       { path: 'projects/:slug', element: <ProjectDetails />, },
       {
-        path: 'projects',
+        path: '',
         element: <AdminRoute />,
         children: [
-          { path: 'create-project', element: <CreateProject /> },
-          { path: 'edit-projects', element: <EditProductPage /> },
-          { path: 'edit-projects/:slug', element: <EditProject /> },
+          { path: 'messages', element: <Messages /> },
+          { path: 'projects/create-project', element: <CreateProject /> },
+          { path: 'projects/edit-projects', element: <EditProductPage /> },
+          { path: 'projects/edit-projects/:slug', element: <EditProject /> },
         ],
       },
       { path: '*', element: <NotFound />, }

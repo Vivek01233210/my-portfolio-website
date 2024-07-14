@@ -64,6 +64,7 @@ export default function Navbar() {
   if (isAuthenticated) {
     NAV_ITEMS.push({ name: 'Edit', path: '/projects/edit-projects' });
     NAV_ITEMS.push({ name: 'Create', path: '/projects/create-project' });
+    NAV_ITEMS.push({ name: 'Message', path: '/messages' });
   } else {
     NAV_ITEMS.push({ name: 'Admin', path: '/login' });
   }
