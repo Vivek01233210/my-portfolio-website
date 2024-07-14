@@ -27,7 +27,7 @@ export default function EditProject() {
     )
 
     const { data } = useQuery({
-        queryKey: ["post-details"],
+        queryKey: ["get-project"],
         queryFn: () => getProjectAPI(slug),
     });
 
