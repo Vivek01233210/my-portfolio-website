@@ -2,12 +2,9 @@ import { useEffect, useState } from "react"
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import './projectCSS.css';
-import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProjectAPI, updateProjectAPI } from "../../APIServices/projectAPI.js";
-
-const baseURL = import.meta.env.VITE_API_URL;
 
 export default function EditProject() {
     const { slug } = useParams();

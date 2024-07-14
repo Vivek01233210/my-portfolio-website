@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import accessDenied from '../assets/access-denied.svg'
+import accessDenied from '../../assets/access-denied.svg'
 import { FaArrowLeft } from 'react-icons/fa6';
 
 export default function AccessDenied() {

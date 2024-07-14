@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import AccessDenied from '../AccessDenied.jsx';
+import AccessDenied from '../Alert/AccessDenied.jsx';
 
 export default function AdminRoute() {
     const { isAuthenticated, user } = useSelector((state) => state.auth);

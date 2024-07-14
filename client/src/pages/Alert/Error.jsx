@@ -1,4 +1,4 @@
-import errorSVG from '../assets/error.svg'
+import errorSVG from '../../assets/error.svg'
 
 export default function Error() {
   return (
