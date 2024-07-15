@@ -1,4 +1,3 @@
-// import 'express-async-errors';
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
@@ -9,20 +8,11 @@ import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 
 // public
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import fs from 'fs';
 import userRouter from './routes/userRoutes.js';
 import projectRouter from './routes/projectRoutes.js';
 import messageRouter from './routes/messageRoutes.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 const app = express();
-
-const filePath = path.join(__dirname, './ProjectDetails.json');
 
 // GLOBAL MIDDLEWARES
 const corsOptions = {
