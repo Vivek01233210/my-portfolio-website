@@ -9,7 +9,7 @@ export default function Footer() {
   const { isAuthenticated } = useSelector(state => state.auth);
 
   return (
-    <footer className="bg-svg2 px-8 pt-4">
+    <footer className="bg-svg2 px-8 pt-4 text-gray-700">
       <div className='flex justify-center gap-12 flex-wrap'>
 
         <div className="flex flex-col items-center justify-center ">
@@ -17,7 +17,7 @@ export default function Footer() {
           <h4>Vivek Kumar</h4>
         </div>
         <div className='flex flex-col items-center justify-center gap-2 '>
-          <button className='px-2 py-1 text-sm border-2 border-black rounded-full hover:bg-black hover:text-white transition-all'>
+          <button className='px-2 py-1 text-sm border-2 border-gray-700 rounded-full hover:bg-black hover:text-white transition-all'>
             Download CV
           </button>
           <div className='flex justify-center gap-4 '>
@@ -25,13 +25,13 @@ export default function Footer() {
               to='https://www.linkedin.com/in/vivek-kumar-503699247'
               target='_blank'
             >
-              <FaLinkedin className='w-6 h-6 cursor-pointer' />
+              <FaLinkedin className='w-6 h-6 cursor-pointer hover:text-black' />
             </Link>
             <Link
               to='https://github.com/Vivek01233210'
               target='_blank'
             >
-              <FaGithub className='w-6 h-6 cursor-pointer' />
+              <FaGithub className='w-6 h-6 cursor-pointer hover:text-black' />
             </Link>
           </div>
         </div>
