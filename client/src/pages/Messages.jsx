@@ -20,7 +20,7 @@ export default function Messages() {
                                 <th className="py-2 px-4 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Name</th>
                                 <th className="py-2 px-4 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Email</th>
                                 <th className="py-2 px-4 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Message</th>
-                                <th className="py-2 px-4 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Time</th>
+                                <th className="py-2 px-4 border-b border-gray-300 text-left text-sm font-medium text-gray-700">Time Stamp</th>
                             </tr>
                         </thead>
                         {isLoading && (
@@ -40,7 +40,7 @@ export default function Messages() {
                                 <tr key={msg._id} className="hover:bg-gray-100">
                                     <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{index + 1}</td>
                                     <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{msg.name}</td>
-                                    <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{msg.email}</td>
+                                    <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{msg.email || "N/A"}</td>
                                     <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{msg.message}</td>
                                     <td className="py-2 px-4 border-b border-gray-300 text-sm text-gray-700">{formatDate(msg.createdAt)}</td>
                                 </tr>

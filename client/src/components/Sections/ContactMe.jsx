@@ -19,18 +19,19 @@ export default function ContactMe() {
         const message = messageRef.current.value;
 
         const clientMessage = { name, email, message };
-        console.log(clientMessage)
 
         messageMutation.mutateAsync(clientMessage)
-            .then(() => console.log("Message sent"))
+            // .then(() => console.log("Message sent"))
+            .then(() => {
+                nameRef.current.value = '';
+                emailRef.current.value = '';
+                messageRef.current.value = '';
+            })
             // .catch(() => console.log("Something went wrong while sending the message. Try again later!"));
             .catch((err) => console.log(err));
-
-        // Clear the form fields
-        // nameRef.current.value = '';
-        // emailRef.current.value = '';
-        // messageRef.current.value = '';
     };
+
+    const { isPending, isError, error, isSuccess } = messageMutation;
 
     return (
         <section className='py-12 px-8 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
@@ -72,9 +73,12 @@ export default function ContactMe() {
                     <div>
                         <button
                             type="submit"
+                            disabled={isPending || isSuccess}
                             className="w-full flex justify-center py-2 px-4 border-2 border-black rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-white hover:text-black focus:outline-none focus:ring-2  focus:ring-stone-300"
                         >
-                            Submit
+                            {isSuccess ? "Message sent" : (
+                                isPending ? "Sending..." : "Submit"
+                            )}
                         </button>
                     </div>
                 </form>

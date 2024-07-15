@@ -20,6 +20,7 @@ import CreateProject from './pages/Project/CreateProject.jsx';
 import PublicRoute from './pages/Authentication/PublicRoute.jsx';
 import AdminRoute from './pages/Authentication/AdminRoute.jsx';
 import Messages from './pages/Messages.jsx';
+import Contact from './pages/Contact.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: 'projects', element: <AllProjects />, },
+      { path: 'contact', element: <Contact />, },
       { path: 'projects/:slug', element: <ProjectDetails />, },
       {
         path: '',
