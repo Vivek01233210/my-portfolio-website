@@ -31,8 +31,8 @@ const corsOptions = {
             "http://localhost:5173",
             "http://localhost:4173",
             "http://portfoliobyvivek.online",
+            "https://portfoliobyvivek.online",
             "http://www.portfoliobyvivek.online",
-            "https://www.portfoliobyvivek.online",
             "https://www.portfoliobyvivek.online",
         ];
         const isAllowed = allowedOrigins.includes(origin);
