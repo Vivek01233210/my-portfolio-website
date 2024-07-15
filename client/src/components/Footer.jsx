@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 export default function Footer() {
 
-  const {isAuthenticated} = useSelector(state => state.auth);
+  const { isAuthenticated } = useSelector(state => state.auth);
 
   return (
     <footer className="bg-svg2 px-8 pt-4">
@@ -21,10 +21,16 @@ export default function Footer() {
             Download CV
           </button>
           <div className='flex justify-center gap-4 '>
-            <Link>
+            <Link
+              to='https://www.linkedin.com/in/vivek-kumar-503699247'
+              target='_blank'
+            >
               <FaLinkedin className='w-6 h-6 cursor-pointer' />
             </Link>
-            <Link>
+            <Link
+              to='https://github.com/Vivek01233210'
+              target='_blank'
+            >
               <FaGithub className='w-6 h-6 cursor-pointer' />
             </Link>
           </div>
