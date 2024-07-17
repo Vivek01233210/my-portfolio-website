@@ -21,6 +21,7 @@ import PublicRoute from './pages/Authentication/PublicRoute.jsx';
 import AdminRoute from './pages/Authentication/AdminRoute.jsx';
 import Messages from './pages/Messages.jsx';
 import Contact from './pages/Contact.jsx';
+import { ImSpinner8 } from 'react-icons/im';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["check-user"],
     queryFn: checkUserAPI,
   });
@@ -70,7 +71,13 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      {isLoading ? (
+        <div className="flex justify-center items-center h-screen m-8 p-8">
+          <ImSpinner8 className="w-28 h-28 animate-spin" />
+        </div>
+      ) : (
+        <RouterProvider router={router} />
+      )}
     </>
   )
 }
