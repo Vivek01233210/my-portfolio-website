@@ -12,7 +12,7 @@ export default function Content() {
 
   return (
     <>
-      <div className='h-16 md:h-20'></div>
+      <div className='h-16 md:h-20 w-full'></div>
 
       <HeroSection />
 
