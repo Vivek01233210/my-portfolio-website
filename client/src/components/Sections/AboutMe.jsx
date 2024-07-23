@@ -24,7 +24,7 @@ export default function AboutMe() {
         <div>
           <ul className="relative list-disc">
             <p className="-ml-6">
-              Hi there! I'm <b>full-stack</b> web developer with a strong foundation in the <b>MERN stack</b> (MongoDB, Express.js, React.js, Node.js).
+              Hi there! I'm a <b>full-stack</b> web developer with a strong foundation in the <b>MERN stack</b> (MongoDB, Express.js, React.js, Node.js).
             </p>
             <li>
               I can design and develop <b>robust RESTful APIs</b> using Node.js and Express.js with proper <b>error handling</b>(sync and async).
@@ -51,13 +51,13 @@ export default function AboutMe() {
                   Skilled in using <b>Bootstrap, Tailwind CSS</b>, and various frontend libraries to create responsive and user - friendly UIs with modern design principles and best practices.
                 </li>
                 <li>
-                  I can easily work with In - app state - management libraries like <b>Redux(action, reducer, selector, dispatch) and context API</b>.<b>Redux Toolkit</b>(createAsyncThunk), <b>RTK Query</b> and <b>Tanstack Query / React query</b> for api - calling, caching, normalization, synchronization, refetching, mutations, optimistic updates, server - state management.
+                  I can easily work with In - app state - management libraries like <b>Redux(action, reducer, selector, dispatch) and context API</b>. <b>Redux Toolkit</b>(createAsyncThunk), <b>RTK Query</b> and <b>Tanstack Query / React query</b> for api - calling, caching, normalization, synchronization, refetching, mutations, optimistic updates, server - state management.
                 </li>
                 <li>
                   I can also integrate the application with <b>Cloudinary</b> for media storage, <b>Stripe</b> for seamless payment gateway integration, <b>Nodemailer</b> for efficient email communication with users and <b>WebSocket / Socket.io(in node)</b> for real - time data communication, enhancing user engagement and interactivity in web applications.
                 </li>
                 <li>
-                  I have also worked with <b>RDBMS</b> like <b>SQL(PostgreSQL, My - SQL)</b> to make complex queries, Nextjs framework(SSR, app - router, File - based Routing, good SEO).
+                  I have also worked with <b>RDBMS</b> like <b>SQL(PostgreSQL, MySQL)</b> to make complex queries, Nextjs framework(SSR, app - router, File - based Routing, good SEO).
                 </li>
                 <li>
                   I am eager to learn new and emerging technologies like <b>Gen AI, LLM, GPT</b> and to integrate in app via APIs.
