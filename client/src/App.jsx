@@ -22,6 +22,7 @@ import AdminRoute from './pages/Authentication/AdminRoute.jsx';
 import Messages from './pages/Messages.jsx';
 import Contact from './pages/Contact.jsx';
 import { ImSpinner8 } from 'react-icons/im';
+import CertificationPage from './pages/Certifications/CertificationPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       },
       { path: 'projects', element: <AllProjects />, },
       { path: 'contact', element: <Contact />, },
+      { path: 'certifications', element: <CertificationPage />, },
       { path: 'projects/:slug', element: <ProjectDetails />, },
       {
         path: '',
