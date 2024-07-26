@@ -11,8 +11,9 @@ import { useMutation } from "@tanstack/react-query";
 
 export default function Navbar() {
   const NAV_ITEMS = [
-    { name: 'Home', path: '/' },
+    // { name: 'Home', path: '/' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Certifications', path: '/certifications' },
     { name: 'Contact', path: '/contact' },
   ]
   const sidebarRef = useRef();
