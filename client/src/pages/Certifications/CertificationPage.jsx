@@ -64,7 +64,7 @@ export default function CertificationPage() {
                         key={index}
                         to={cert.link}
                         target='_blank'
-                        className="border-2 border-stone-700 w-72 sm:w-64 rounded-lg overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+                        className="bg-white border-2 border-stone-700 w-72 sm:w-64 rounded-lg overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
                     >
                         <img src={cert.img} alt="certificate-img" className="h-full object-cover w-full block" />
                         <div className="py-1 px-2">
