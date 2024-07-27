@@ -31,7 +31,7 @@ export default function ContactMe() {
             .catch((err) => console.log(err));
     };
 
-    const { isPending, isError, error, isSuccess } = messageMutation;
+    const { isPending, isSuccess } = messageMutation;
 
     return (
         <section className='py-12 px-8 sm:px-10 lg:px-12 sm:mx-12 lg:mx-20'>
