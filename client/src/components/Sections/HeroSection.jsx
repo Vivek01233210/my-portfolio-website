@@ -45,12 +45,13 @@ export default function HeroSection() {
                     </span>
                     <span className='my-2 text-gray-700 text-md sm:text-xl'>Developer</span>
                 </p>
-                <Link
-                    to="https://drive.google.com/file/d/1ylvZpf5XVQ5uLUlM0yhtP8jYa98YGP-b/view"
+                <a
+                    href="Vivek_Resume.pdf"
                     target='_blank'
-                    className='mt-3 py-2 px-4 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all'>
+                    // download='Vivek_Resume.pdf'
+                    className='mt-3 py-2 px-4 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'>
                     Download CV
-                </Link>
+                </a>
                 <div className='mt-4 flex gap-4 md:gap-6'>
                     <Link
                         to='https://www.linkedin.com/in/vivek-kumar-503699247'

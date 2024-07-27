@@ -17,12 +17,13 @@ export default function Footer() {
           <h4>Vivek Kumar</h4>
         </div>
         <div className='flex flex-col items-center justify-center gap-2 '>
-          <Link
-            to="https://drive.google.com/file/d/1ylvZpf5XVQ5uLUlM0yhtP8jYa98YGP-b/view"
+          <a
+            href="Vivek_Resume.pdf"
             target='_blank'
+            // download='Vivek_Resume.pdf'
             className='px-2 py-1 text-sm border-2 border-gray-700 rounded-full hover:bg-black hover:text-white transition-all'>
             Download CV
-          </Link>
+          </a>
           <div className='flex justify-center gap-4 '>
             <Link
               to='https://www.linkedin.com/in/vivek-kumar-503699247'
