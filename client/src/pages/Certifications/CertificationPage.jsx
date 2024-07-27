@@ -55,7 +55,7 @@ const CERTIFICATES = [
 export default function CertificationPage() {
 
     return (
-        <section className="mx-24 py-12 px-8 md:py-16 lg:px-24 xl:px-32">
+        <section className="mx-4 sm:mx-6 md:mx-12 py-12 sm:px-8 md:py-16 lg:px-24 xl:px-32">
             <h1 className="py-6 font-semibold text-3xl text-center">My Certifications</h1>
             <div className="my-4 flex items-center justify-center gap-4 md:gap-8 lg:gap-12 flex-wrap">
                 {/* Certificate cards */}
@@ -64,7 +64,7 @@ export default function CertificationPage() {
                         key={index}
                         to={cert.link}
                         target='_blank'
-                        className="border-2 border-stone-700 w-48 rounded-lg overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+                        className="border-2 border-stone-700 w-72 sm:w-64 rounded-lg overflow-hidden transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
                     >
                         <img src={cert.img} alt="certificate-img" className="h-full object-cover w-full block" />
                         <div className="py-1 px-2">
