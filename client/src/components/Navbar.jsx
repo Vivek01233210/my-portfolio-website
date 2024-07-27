@@ -80,14 +80,20 @@ export default function Navbar() {
     <nav className={`fixed z-10 w-full h-16 flex justify-between items-center ${isTop ? '' : 'shadow-md backdrop-blur-lg'} transition-all`}>
       <IoMenu onClick={() => setIsSidebarOpen(true)} className="w-12 h-12 p-2 ml-4 hover:bg-gray-200 rounded-md cursor-pointer md:hidden" />
 
-      {/* Sidebar position fixed */}
+      {/* Sidebar - position fixed */}
       <div
         ref={sidebarRef}
         className={`fixed ${isSidebarOpen ? 'left-0' : '-left-60'} top-0 h-screen w-60 bg-white sidebar z-20 shadow-2xl rounded-r-xl flex flex-col`}>
         <div className="py-8 mt-8 flex flex-col items-center justify-center gap-2 border-b-[1px] border-gray-300">
           <img src={user} alt="user-img"
-            className="w-28 h-28 rounded-full object-cover shadow-2xl bw" />
-          <Link to='/' className="text-2xl font-medium tracking-wide">Vivek Kumar</Link>
+            className="w-28 h-28 rounded-full object-cover shadow-2xl bw"
+          />
+          <Link
+            to='/'
+            onClick={() => setIsSidebarOpen(false)}
+            className="text-2xl font-medium tracking-wide">
+            Vivek Kumar
+          </Link>
         </div>
         <ul className="flex flex-col items-start gap-4 py-8 px-2">
           {NAV_ITEMS.map((item, index) => (
@@ -100,8 +106,8 @@ export default function Navbar() {
             </Link>
           ))}
           {isAuthenticated && (
-            <button onClick={()=>{handleLogout(); setIsSidebarOpen(false)}} 
-            className="p-4 w-full text-center text-xl cursor-pointer active:bg-stone-300 rounded-lg">
+            <button onClick={() => { handleLogout(); setIsSidebarOpen(false) }}
+              className="p-4 w-full text-center text-xl cursor-pointer active:bg-stone-300 rounded-lg">
               Logout
             </button>
           )}
@@ -135,8 +141,8 @@ export default function Navbar() {
             </Link>
           ))}
           {isAuthenticated && (
-            <button onClick={handleLogout} 
-            className="cursor-pointer underline-offset-4 hover:underline">
+            <button onClick={handleLogout}
+              className="cursor-pointer underline-offset-4 hover:underline">
               Logout
             </button>
           )}
