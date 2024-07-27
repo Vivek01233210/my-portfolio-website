@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { IoMenu, IoClose } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import user from '../assets/user12.jpg';
 // import { NAV_ITEMS } from "../Constants.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,13 +97,15 @@ export default function Navbar() {
         </div>
         <ul className="flex flex-col items-start gap-4 py-8 px-2">
           {NAV_ITEMS.map((item, index) => (
-            <Link
+            <NavLink
               to={item.path}
               key={index}
               onClick={() => setIsSidebarOpen(false)}
-              className="p-4 w-full text-center text-xl cursor-pointer active:bg-stone-300 rounded-lg" >
+              className={({ isActive }) =>
+                `p-4 w-full text-center text-xl cursor-pointer rounded-lg ${isActive ? 'bg-stone-300' : ''}`
+              }>
               {item.name}
-            </Link>
+            </NavLink>
           ))}
           {isAuthenticated && (
             <button onClick={() => { handleLogout(); setIsSidebarOpen(false) }}
@@ -132,13 +134,15 @@ export default function Navbar() {
       <div className="hidden md:block order-1">
         <ul className="flex gap-8 lg:gap-16  md:text-lg lg:text-xl mr-16 lg:mr-20">
           {NAV_ITEMS.map((item, index) => (
-            <Link
+            <NavLink
               to={item.path}
               key={index}
-              className="cursor-pointer underline-offset-4 hover:underline"
-            >
+              onClick={() => setIsSidebarOpen(false)}
+              className={({ isActive }) =>
+                `cursor-pointer ${isActive ? 'underline-offset-4 underline' : ''}`
+              }>
               {item.name}
-            </Link>
+            </NavLink>
           ))}
           {isAuthenticated && (
             <button onClick={handleLogout}
