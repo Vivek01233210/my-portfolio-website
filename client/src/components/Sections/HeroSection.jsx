@@ -46,7 +46,7 @@ export default function HeroSection() {
                     <span className='my-2 text-gray-700 text-md sm:text-xl'>Developer</span>
                 </p>
                 <a
-                    href="Vivek_Resume.pdf"
+                    href="Vivek_Resume1.pdf"
                     target='_blank'
                     // download='Vivek_Resume.pdf'
                     className='mt-3 py-2 px-4 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'>
